@@ -1,0 +1,94 @@
+/*!
+ * Start Bootstrap - Scrolling Nav (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ *
+ * Everything until line 30 is credit to Start Bootstrap. Line 30 onwards is work by Specter (Cryptogenic)
+ */
+
+body {
+    width: 100%;
+    height: 100%;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+@media(min-width:767px) {
+    .navbar-m {
+        padding: 10px 0;
+        -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
+        -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
+        transition: background .5s ease-in-out,padding .5s ease-in-out;
+    }
+
+    .top-nav-collapse {
+        padding: 0;
+    }
+}
+
+/* Site Framework Sections */
+
+.summary-section {
+    height: 100%;
+    padding-top: 150px;
+    text-align: center;
+    background: #fff;
+}
+
+.setup-section {
+    height: 100%;
+    padding-top: 150px;
+    text-align: left;
+    background: #eee;
+}
+
+.download-section {
+    height: 100%;
+    padding-top: 150px;
+    text-align: center;
+    background: #fff;
+}
+
+/* Note Components */
+
+.note {
+  background: #eee;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.note-seperator {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 7px;
+  margin-right: 7px;
+  border: 0;
+  border-top: 1px solid #c7c7c7;
+}
+
+.note-head {
+  font-weight: bold;
+}
+
+.note-body {
+  font-weight: none;
+}
+
+/* Custom Seperators */
+
+.light-seperator {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 0;
+  border-top: 1px solid #eee;
+}
+
+.dark-seperator {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 0;
+  border-top: 1px solid #c7c7c7;
+}
