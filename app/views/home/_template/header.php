@@ -45,7 +45,7 @@
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse navbar-ex1-collapse">
-        <ul class="nav navbar-nav nabar-m">
+        <ul class="nav navbar-nav nabar">
           <!-- Hidden li included to remove active class from summary link when scrolled up past summary section -->
           <li class="hidden">
             <a class="page-scroll" href="#page-top"></a>
