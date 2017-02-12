@@ -19,5 +19,5 @@
     public $alertSuccess;
     public $alertError;
 
-  	public function __construct($db) {}
+    public function __construct($db) {}
   }
