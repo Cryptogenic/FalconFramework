@@ -16,6 +16,8 @@
   	{
       if(MYSQL_USE == "YES")
   		  $this->db = new PDO('mysql:host=localhost;dbname=' . MYSQL_AREA, MYSQL_USER, MYSQL_PSWD);
+      else
+        $this->db = false;
   	}
 
   	protected function model($model)

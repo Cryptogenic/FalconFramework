@@ -16,5 +16,8 @@
   	public $activeGroup;
   	public $activePage;
 
+    public $alertSuccess;
+    public $alertError;
+
   	public function __construct($db) {}
   }

@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,7 +42,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand page-scroll" href="#page-top"><?php echo PROJECT_NAME; ?></a>
+        <a class="navbar-brand page-scroll" href="<?php echo ASSET_ROOT; ?>/home/index"><?php echo PROJECT_NAME; ?></a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -60,8 +62,26 @@
             <a class="page-scroll" href="#download">Download</a>
           </li>
         </ul>
-        <div class="pull-right">
-          <a class="btn btn-danger navbar-btn" href="#">Test Login</a>
+        <!-- Add a margin of 7px to the top to align with the navbar menu -->
+        <div class="pull-right" style="margin-top: 7px">
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownAccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <?php if(empty($_SESSION)): ?>
+                Guest
+              <?php else: ?>
+                <?php echo $_SESSION['user']['name']; ?>
+              <?php endif; ?>
+              <span class="caret"></span>
+            </button>
+            
+            <ul class="dropdown-menu" aria-labelledby="dropdownAccount">
+              <?php if(empty($_SESSION)): ?>
+                <li><a href="<?php echo ASSET_ROOT; ?>/home/login">Test Login/Register</a></li>
+              <?php else: ?>
+                <li><a href="<?php echo ASSET_ROOT; ?>/home/login/dologout">Test Logout</a></li>
+              <?php endif; ?>
+            </ul>
+          </div>
         </div>
       </div>
       <!-- /.navbar-collapse -->

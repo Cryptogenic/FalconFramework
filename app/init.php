@@ -39,7 +39,7 @@
 
   // MySQL Credentials - edit to your needs
   //  Note: You should not use the root user in a production environment!!!
-  define('MYSQL_USE',   'NO');
+  define('MYSQL_USE',   'YES');
   define('MYSQL_HOST', 	'localhost');
   define('MYSQL_AREA', 	'falconframework');
   define('MYSQL_USER', 	'root');
