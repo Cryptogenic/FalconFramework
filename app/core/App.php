@@ -15,21 +15,12 @@
     protected $method = 'index';
     protected $params = array();
 
-    /*
-      Method: App::__construct()
-
-      Parameters:
-      None
-
-      Returns:
-      Nothing
-
-      Description: The class constructor for the App class, calls parseUrl() to parse the URL given by Apache.
-    */
     public function __construct()
     {
+      // Parses the url passed via Apache's rewrite engine for our MVC design framework
       $url = $this->parseUrl();
 
+      // Includes necessary controller should it exist
       if(file_exists('../app/controllers/' . $url[0] . ".php"))
       {
         $this->controller = $url[0];
@@ -49,22 +40,12 @@
         }
       }
 
+      // Anything after domain/controller/method are arguments to the given method
       $this->params = $url ? array_values($url) : [];
 
       call_user_func_array([$this->controller, $this->method], $this->params);
     }
 
-    /*
-      Method: App::parseUrl()
-
-      Parameters:
-      None
-
-      Returns:
-      Nothing
-
-      Description: Parses the url passed via Apache's rewrite engine for our MVC design framework.
-    */
     protected function parseUrl()
     {
       if(isset($_GET['url']))

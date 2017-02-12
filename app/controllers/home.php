@@ -41,7 +41,7 @@
 
       if($action == "dologin")
       {
-        // Validate login
+        // Validate login, display result via the page model
         $result = $models['user']->login($_POST['email'], $_POST['password'], 0);
 
         if(strpos($result, "S| ") !== false)
@@ -52,7 +52,7 @@
       }
       else if($action == "doregister")
       {
-        // Register user
+        // Register user, display result via the page model
         $result = $models['user']->register($_POST['email'], $_POST['username'], $_POST['password'], $_POST['passwordConf'], $_POST['referrer']);
 
         if(strpos($result, "S| ") !== false)

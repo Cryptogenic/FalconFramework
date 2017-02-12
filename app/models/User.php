@@ -6,10 +6,11 @@
 
   class User
   {
+    // Quick variables to access about a given user. Initialized when setUser() is called
     public $name;
     public $info;
-    public $stats;
 
+    // An instance of the PDO object passed via the constructor
     protected $db;
 
     public function __construct($db)
@@ -32,7 +33,6 @@
 
         $this->info = $sql->fetch(PDO::FETCH_OBJ);
         $this->name = $this->info->username;
-        $this->stats = json_decode($this->info->stats, true);
 
         unset($sql);
 
@@ -98,13 +98,14 @@
       if(empty($email) || empty($user) || empty($password) || empty($passwordConfirm))
         return "E| One or more fields were not completed.";
 
+        // Checks integrity, see lib/check.php for more information
       if(!checkIntegrityName($user))
         return "E| Usernames can only be alphanumeric, and must be " . INTEGRITY_NAME_MIN . "-" . INTEGRITY_NAME_MAX . " characters in length.";
 
       if(!checkIntegrityEmail($email))
         return "E| The email you entered does not appear to be a valid email address.";
 
-      if(strlen($password) < 5)
+      if(strlen($password) < 6)
         return "E| Password too short!";
 
       if($password != $passwordConfirm)
@@ -131,7 +132,7 @@
       }
 
       if($userInfo != false)
-      return "E| The username '" . htmlspecialchars($user) . "' is already taken. Please choose another username.";
+        return "E| The username '" . htmlspecialchars($user) . "' is already taken. Please choose another username.";
 
       // Check if email is already being used
       try
@@ -159,7 +160,7 @@
       // Passed all integrity checks, create account
       $password = password_hash($password, PASSWORD_BCRYPT);
 
-      $id     = NULL;
+      $id     = NULL; // MySQL will auto increment and set this automatically
 
       try
       {
@@ -181,6 +182,9 @@
 
           return "S| Your account has been registered!";
         }
+
+        // If we've reached this point something is wrong. Display full error if
+        // output is set to ALL or CRITICAl
 
         if(SECURITY_DEBUG_OUTPUT == "ALL" || SECURITY_DEBUG_OUTPUT == "CRITICAL")
         {

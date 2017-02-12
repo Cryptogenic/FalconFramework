@@ -10,14 +10,18 @@
 
   class Page
   {
+    // General page information
     public $title;
     public $accessibilty;
 
+    // Only important in things like admin panels, can be used for where to display 'class="active"' for example
     public $activeGroup;
     public $activePage;
 
+    // Set by the controller, allows alerts to be displayed on the page depending on the action passed from the view
     public $alertSuccess;
     public $alertError;
 
+    // As the page doesn't need any constructing, leave unimplemented
     public function __construct($db) {}
   }
