@@ -10,25 +10,25 @@
 
   class Controller
   {
-  	protected $db;
+    protected $db;
 
-  	public function __construct()
-  	{
+    public function __construct()
+    {
       if(MYSQL_USE == "YES")
-  		  $this->db = new PDO('mysql:host=localhost;dbname=' . MYSQL_AREA, MYSQL_USER, MYSQL_PSWD);
+        $this->db = new PDO('mysql:host=localhost;dbname=' . MYSQL_AREA, MYSQL_USER, MYSQL_PSWD);
       else
         $this->db = false;
-  	}
+    }
 
-  	protected function model($model)
-  	{
-  		require_once('../app/models/' . $model . '.php');
+    protected function model($model)
+    {
+      require_once('../app/models/' . $model . '.php');
 
-  		return new $model($this->db);
-  	}
+      return new $model($this->db);
+    }
 
-  	protected function view($view, $data = array())
-  	{
-  		require_once('../app/views/' . $view . '.php');
-  	}
+    protected function view($view, $data = array())
+    {
+      require_once('../app/views/' . $view . '.php');
+    }
   }

@@ -10,11 +10,11 @@
 
   class Page
   {
-  	public $title;
-  	public $accessibilty;
+    public $title;
+    public $accessibilty;
 
-  	public $activeGroup;
-  	public $activePage;
+    public $activeGroup;
+    public $activePage;
 
     public $alertSuccess;
     public $alertError;
