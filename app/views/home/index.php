@@ -69,6 +69,7 @@
           <div class="col-lg-12">
             <h1>Download</h1>
             <div class="light-seperator"></div>
+            <a href="https://github.com/Cryptogenic/FalconFramework/releases/tag/v1.0">Version 1.0</a>
           </div>
         </div>
       </div>
