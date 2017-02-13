@@ -1,0 +1,26 @@
+/* Navigation Bar size edit + content margin hack */
+.navbar
+{
+  padding: 10px 0;
+}
+
+.jumbo-spacer
+{
+    margin-top: 100px;
+}
+
+/* Color change for navigation bar background and foreground */
+.navbar-inverse
+{
+  background-color: #de0000;
+}
+
+.navbar-inverse .navbar-brand
+{
+  color: #ffffff;
+}
+
+.navbar-inverse .navbar-nav>li>a
+{
+  color: #fffafa;
+}

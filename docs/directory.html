@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Falcon Framework Docs // Directory Structure</title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- FontAwesome v4.7.0 -->
+  <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="assets/css/ff-docs.css" rel="stylesheet">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">Falcon Framework Documentation</a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="main-navbar-collapse">
+        <div class="pull-right">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="config.html">Configuration</a>
+            </li>
+            <li class="active">
+              <a href="directory.html">Directory Structure</a>
+            </li>
+            <li>
+              <a href="pagesystem.html">Page System</a>
+            </li>
+            <li>
+              <a href="loginsystem.html">Login System</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- Jumbotron Header -->
+    <header class="jumbotron jumbo-spacer">
+      <h1>Directory Structure</h1>
+
+      <div class="alert alert-info">
+        <span style="font-weight: bold;">Note:</span> This listing only has folders and files that are important to the framework's operation. To see information about a given file or sub-folder, simply over over it below and a tooltip will be displayed giving further information.
+      </div>
+
+      <p>
+        <i class="fa fa-folder"></i><span style="font-weight: bold;" data-toggle="tooltip" data-placement="right" title="Contains the framework."> / [root]</span>
+      </p>
+
+      <span style="font-size: 21px;">
+
+        <ul style="list-style:none;">
+          <li>
+            <i class="fa fa-folder"></i><span style="font-weight: bold;" data-toggle="tooltip" data-placement="right" title="Contains models, views, controllers, and the core implementation."> app</span>
+
+            <ul style="list-style:none;">
+              <li><i class="fa fa-folder"></i><span style="font-weight: bold;" data-toggle="tooltip" data-placement="right" title="All of your controllers are here. These contain logic, no direct db handling nor display code."> controllers</span></li>
+              <li><i class="fa fa-folder"></i><span style="font-weight: bold;" data-toggle="tooltip" data-placement="right" title="Provides functions for parsing the URL, and handling models and views. You should not need to edit this!"> core</span></li>
+              <li><i class="fa fa-folder"></i><span style="font-weight: bold;" data-toggle="tooltip" data-placement="right" title="All of your models are here. These can be used for db handling and storing data."> models</span></li>
+              <li><i class="fa fa-folder"></i><span style="font-weight: bold;" data-toggle="tooltip" data-placement="right" title="All of your pages/views. These should contain display logic, not controller logic or data handling."> views</span></li>
+              <li><i class="fa fa-file"></i><span data-toggle="tooltip" data-placement="right" title="Prevents indexing of the app folder, however this folder should be outside of your public directory anyways!"> .htaccess</span></li>
+              <li><i class="fa fa-file"></i><span data-toggle="tooltip" data-placement="right" title="Initializes the framework and contains macros and settings you should edit, such as MySQL credentials."> init.php</span></li>
+            </ul>
+          </li>
+
+          <li>
+            <i class="fa fa-folder"></i><span style="font-weight: bold;" data-toggle="tooltip" data-placement="right" title="You are here!"> docs</span>
+          </li>
+
+          <li>
+            <i class="fa fa-folder"></i><span style="font-weight: bold;" data-toggle="tooltip" data-placement="right" title="Anything in here can be accessed by anyone on the web!"> public</span>
+
+            <ul style="list-style:none;">
+              <li><i class="fa fa-folder"></i><span style="font-weight: bold;" data-toggle="tooltip" data-placement="right" title="Contains assets such as css, js, and images for your website. Any new CSS, JS, or images you want to add go in here."> assets</span></li>
+              <li><i class="fa fa-file"></i><span data-toggle="tooltip" data-placement="right" title="Contains rewrite rules, only needs to be edited if your public path isn't /!"> .htaccess</span></li>
+              <li><i class="fa fa-file"></i><span data-toggle="tooltip" data-placement="right" title="Initializes your app, only needs to be edited if your public path isn't /!"> index.php</span></li>
+            </ul>
+          </li>
+        </ul>
+
+      </span>
+    </header>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+      <div class="row">
+        <div class="col-lg-12">
+          <p><a href="https://github.com/Cryptogenic/FalconFramework" style="font-weight:bold;color:#333;">Falcon Framework's official GitHub repo</a></p>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+  <!-- /.container -->
+
+  <!-- jQuery -->
+  <script src="assets/js/jquery.js"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="assets/js/bootstrap.min.js"></script>
+
+  <!-- Tooltips -->
+  <script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+  </script>
+
+</body>
+</html>

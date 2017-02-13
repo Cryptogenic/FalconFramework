@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Falcon Framework Docs // Configuration</title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="assets/css/ff-docs.css" rel="stylesheet">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">Falcon Framework Documentation</a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="main-navbar-collapse">
+        <div class="pull-right">
+          <ul class="nav navbar-nav">
+            <li class="active">
+              <a href="config.html">Configuration</a>
+            </li>
+            <li>
+              <a href="directory.html">Directory Structure</a>
+            </li>
+            <li>
+              <a href="pagesystem.html">Page System</a>
+            </li>
+            <li>
+              <a href="loginsystem.html">Login System</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- Jumbotron Header -->
+    <header class="jumbotron jumbo-spacer">
+      <h1>Configuration</h1>
+
+      <p>
+        <img src="assets/img/rootfolder.png" style="float:right;padding-left:10px;padding-top:5px;" />
+        Setting up Falcon Framework is simple to get running, as everything in the framework that references a path utilizes one or two files, meaning whenever you change your project's location, you don't have to frantically search for paths to fix. When you download Falcon Framework and extract it, you'll have the main folder that contains other folders like <code>/app</code>, <code>/docs</code>, and <code>/public</code>. We'll call this the "root" folder.
+      </p>
+      <br />
+      <p>
+        While <code>/app</code> and <code>/docs</code> should remain as they are, the "public" folder you may want to rename depending on your server host or filesystem. If your host OS is Ubuntu 14.04 and you're using a VPS for example, your public folder for Apache would probably be <code>/var/www/</code>. This means the root contents of Falcon Framework would be placed in <code>/var/</code>, and you would rename your <code>public</code> folder to <code>www</code>. Where your public directory is, is dependent on the filesystem and whether or not you're using a VPS or shared hosting, in which case you'd rename your <code>public</code> folder to <code>public_html</code> and leave the root contents in the chrooted <code>/</code> directory.
+      </p>
+      <p>
+        If your site or project using Falcon Framework is going to be in the root of the public directory (eg. your domain is "http://myproject.com/" and your app is right in the root of this domain), you can stop here. If you want your project to be in a different directory though (such as http://myproject.com/project/), read below.
+      </p>
+      <hr />
+      <p>
+        It's not too difficult to have your app function in a different public directory than root, it just requires the editing of a few files and moving the contents of the <code>public</code> folder. Firstly, you're going to want to create the directory for your app (such as <code>[public root]/project/</code>), then you're going to move the contents of the <code>public</code> folder to this new directory.
+      </p>
+      <p>
+        You will now need to adjust the path in the <code>index.php</code> file that lies in the public directory you just created, specifically <code>line 11</code>.
+        <br /><br />
+        <code>require_once('../app/init.php');</code>
+        <br /><br />
+        You'll want to change this as it's a relative path. If for example your path for where you want your project to be publically accessible is <code>/var/www/project/</code>, and the framework is located in <code>/var/</code>, then you'll want to change the path to the following;
+        <br /><br />
+        <code>require_once('../../app/init.php');</code>
+      </p>
+      <hr />
+      <p>
+        Now, only two files require minor edits. Also in the public directory is the <code>.htaccess</code> file, what's important is <code>line 4</code>. You want to edit the following line;
+        <br /><br />
+        <code>RewriteBase /</code>
+        <br /><br />
+        You want the part after "RewriteBase" in the rewrite rule to point to the public directory of your project. Again for example, if your app was in "http://myproject.com/project/", you would change it to the following;
+        <br /><br />
+        <code>RewriteBase /project</code>
+      </p>
+      <hr />
+      <p>
+        Finally, you just need to edit the path on <code>line 78</code>, the "root macro", to point to the same path as it was pointing to in the RewriteBase rule edit in the <code>.htaccess</code> file above. Your project should now be up and running the sub-directory you want, however for the most part you'll probably want your app in the root public directory anyways and build the rest of your app around the framework.
+      </p>
+    </header>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+      <div class="row">
+        <div class="col-lg-12">
+          <p><a href="https://github.com/Cryptogenic/FalconFramework" style="font-weight:bold;color:#333;">Falcon Framework's official GitHub repo</a></p>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+  <!-- /.container -->
+
+  <!-- jQuery -->
+  <script src="assets/js/jquery.js"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="assets/js/bootstrap.min.js"></script>
+
+</body>
+</html>

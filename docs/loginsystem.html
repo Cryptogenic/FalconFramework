@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Falcon Framework Docs // Login System</title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="assets/css/ff-docs.css" rel="stylesheet">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">Falcon Framework Documentation</a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="main-navbar-collapse">
+        <div class="pull-right">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="config.html">Configuration</a>
+            </li>
+            <li>
+              <a href="directory.html">Directory Structure</a>
+            </li>
+            <li>
+              <a href="pagesystem.html">Page System</a>
+            </li>
+            <li class="active">
+              <a href="loginsystem.html">Login System</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- Jumbotron Header -->
+    <header class="jumbotron jumbo-spacer">
+      <h1>Login System</h1>
+
+      <p>
+        The login system follows the fundamental rule of the MVC design pattern by ensuring all data (such as the logged in user's name, ID, etc.) is stored and handled in the <code>user</code> model, and the controller handles the request (POST) from the view, and handles the logic of how to proceed based on the model's response. In the framework example, the following is a step by step process of how logging in / registration is handled.
+      </p>
+      <hr />
+      <p>
+        The view displays an HTML POST form for the user to enter the data.
+        <br /><br />
+        <code>
+          &lt;form method="POST" class="form" action="&lt;?php echo ASSET_ROOT; ?&gt;/home/login/dologin"&gt;<br />
+           &nbsp;&nbsp;&lt;div class="form-group"&gt;<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&lt;label class="sr-only" for="formEmail"&gt;Email&lt;/label&gt;<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="text" id="formEmail" name="email" class="form-control mb-2 mr-sm-2 mb-sm-0" placeholder="Email" /&gt;<br />
+            &nbsp;&nbsp;&lt;/div&gt;<br />
+            <br />
+            &nbsp;&nbsp;&lt;div class="form-group"&gt;<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&lt;label class="sr-only" for="formPassword">Password&lt;/label&gt;<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="password" id="formPassword" name="password" class="form-control mb-2 mr-sm-2 mb-sm-0" placeholder="Password" /&gt;<br />
+            &nbsp;&nbsp;&lt;/div&gt;<br />
+            <br />
+            &nbsp;&nbsp;&lt;div class="form-group"&gt;<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="submit" name="loginBtn" class="btn btn-success" value="Login" /&gt;<br />
+            &nbsp;&nbsp;&lt;/div&gt;<br />
+          &lt;/form&gt;<br />
+        </code>
+      </p>
+      <p>
+        Notice the action property of the form pointing to <code>/home/login/dologin</code>. This essentially means to the framework, "pass argument <code>'dologin'</code> to the <code>login()</code> method in the home controller. <code>"dologin"</code> is a variable passed to <code>login()</code>, it acts as an action, and determines what the <code>login()</code> method does.
+        <br /><br />
+        <code>
+          public function login($action = NULL)<br />
+          {<br />
+            &nbsp;&nbsp;$models = array(<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;'page'  => $this->model('page'),<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;'user'  => $this->model('user')<br />
+            &nbsp;&nbsp;);<br />
+            <br />
+            &nbsp;&nbsp;$models['page']->title = "Falcon Framework | Login";<br />
+            &nbsp;&nbsp;$models['page']->accessibility = 0;<br />
+            &nbsp;&nbsp;$models['page']->activeGroup = "None";<br />
+            &nbsp;&nbsp;$models['page']->activePage  = "";<br />
+            <br />
+            &nbsp;&nbsp;if($action == "dologin")<br />
+            &nbsp;&nbsp;{<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;// Validate login, display result via the page model<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;$result = $models['user']->login($_POST['email'], $_POST['password'], 0);<br />
+              <br />
+              &nbsp;&nbsp;&nbsp;&nbsp;if(strpos($result, "S| ") !== false)<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$models['page']->alertSuccess = substr($result, 2);<br />
+              <br />
+              &nbsp;&nbsp;&nbsp;&nbsp;if(strpos($result, "E| ") !== false)<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;$models['page']->alertError = substr($result, 2);<br />
+            &nbsp;&nbsp;}<br />
+            &nbsp;&nbsp;else if($action == "doregister")<br />
+            &nbsp;&nbsp;{<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;// Register user, display result via the page model<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;$result = $models['user']->register($_POST['email'], $_POST['username'], $_POST['password'], $_POST['passwordConf'], $_POST['referrer']);<br />
+              <br />
+              &nbsp;&nbsp;&nbsp;&nbsp;if(strpos($result, "S| ") !== false)<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$models['page']->alertSuccess = substr($result, 2);<br />
+              <br />
+              &nbsp;&nbsp;&nbsp;&nbsp;if(strpos($result, "E| ") !== false)<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$models['page']->alertError = substr($result, 2);<br />
+            &nbsp;&nbsp;}<br />
+            &nbsp;&nbsp;else if($action == "dologout")<br />
+            &nbsp;&nbsp;{<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;// Destroy session effectively logging the user out<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;session_destroy();<br />
+            &nbsp;&nbsp;}<br />
+            <br />
+            &nbsp;&nbsp;$this->load('login', $models);<br />
+          }<br />
+        </code>
+      </p>
+      <p>
+        What essentially happens is the controller method handles the post data and passes it along to a method inside the "User" model, which validates the login. Registration works in a similar way. The controller then checks the result and modifies the <code>alert</code> variables of the page model, and re-renders the view with the alert containing the result of the login or registration attempt. To see how the login and registration functions are implemented, you may look into <code>app/models/user.php</code>. These functions should be very easily portable to your project, and are a good, secure starting point for a login system, using BCRYPT hashing for your client's paswords.
+      </p>
+    </header>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+      <div class="row">
+        <div class="col-lg-12">
+          <p><a href="https://github.com/Cryptogenic/FalconFramework" style="font-weight:bold;color:#333;">Falcon Framework's official GitHub repo</a></p>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+  <!-- /.container -->
+
+  <!-- jQuery -->
+  <script src="assets/js/jquery.js"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="assets/js/bootstrap.min.js"></script>
+
+  <!-- Tooltips -->
+  <script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+  </script>
+
+</body>
+</html>
